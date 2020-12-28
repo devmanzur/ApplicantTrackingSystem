@@ -1,8 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{44DD4590-8451-48CD-B598-96689A74EEEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hahn.ApplicatonProcess.December2020.Domain", "Hahn.ApplicatonProcess.December2020.Domain\Hahn.ApplicatonProcess.December2020.Domain.csproj", "{5DB4310D-819A-49AD-983D-B4B124338464}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5DB4310D-819A-49AD-983D-B4B124338464} = {44DD4590-8451-48CD-B598-96689A74EEEC}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5DB4310D-819A-49AD-983D-B4B124338464}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DB4310D-819A-49AD-983D-B4B124338464}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DB4310D-819A-49AD-983D-B4B124338464}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DB4310D-819A-49AD-983D-B4B124338464}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
