@@ -10,7 +10,7 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Entities
         public Applicant(Name name, FamilyName familyName, Address address, Country countryOfOrigin,
             EmailAddress emailAddress, Age age, bool hired = false)
         {
-            CheckRule(new PropertyMustNotBeNull(name, nameof(Name)));
+            CheckRule(new PropertyMustNotBeNull(name, nameof(Applicant.Name)));
             CheckRule(new PropertyMustNotBeNull(familyName, nameof(FamilyName)));
             CheckRule(new PropertyMustNotBeNull(address, nameof(Address)));
             CheckRule(new PropertyMustNotBeNull(countryOfOrigin, nameof(CountryOfOrigin)));
