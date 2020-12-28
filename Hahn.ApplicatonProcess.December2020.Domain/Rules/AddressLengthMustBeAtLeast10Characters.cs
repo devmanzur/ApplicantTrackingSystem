@@ -12,7 +12,10 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Rules
             _address = address;
         }
 
-        public bool IsBroken() => _address.Length < 10;
+        public bool IsBroken()
+        {
+            return _address == null || _address.Length < 10;
+        }
 
         public string Message => "address must be at least 10 characters";
     }

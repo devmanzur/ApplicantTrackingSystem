@@ -11,7 +11,9 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Rules
             _name = name;
         }
 
-        public bool IsBroken() => _name.Length < 5;
+        public bool IsBroken(){
+            return _name == null || _name.Length < 5;
+        }
 
         public string Message => "name must be at least 5 characters";
     }

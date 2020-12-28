@@ -11,7 +11,10 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Rules
             _familyName = familyName;
         }
 
-        public bool IsBroken() => _familyName.Length < 5;
+        public bool IsBroken()
+        {
+            return _familyName == null || _familyName.Length < 5;
+        }
 
         public string Message => "family name must be at least 5 characters";
     }
