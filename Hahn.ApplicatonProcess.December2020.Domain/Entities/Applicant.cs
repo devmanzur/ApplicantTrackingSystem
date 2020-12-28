@@ -7,7 +7,7 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Entities
 {
     public class Applicant
     {
-        public Applicant(PersonName name, FamilyName familyName, Address address, Country countryOfOrigin,
+        public Applicant(Name name, FamilyName familyName, Address address, Country countryOfOrigin,
             EmailAddress emailAddress, Age age, bool hired = false)
         {
             CheckRule(new PropertyMustNotBeNull(name, nameof(Name)));
@@ -27,7 +27,7 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Entities
         }
 
         public int Id { get; protected set; }
-        public PersonName Name { get; private set; }
+        public Name Name { get; private set; }
         public FamilyName FamilyName { get; private set; }
         public Address Address { get; private set; }
         public Country CountryOfOrigin { get; private set; }
@@ -35,33 +35,39 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Entities
         public Age Age { get; private set; }
         public bool Hired { get; private set; }
 
-        public void Set(PersonName name)
+        public void Set(Name name)
         {
+            CheckRule(new PropertyMustNotBeNull(name, nameof(Name)));
             Name = name;
         }
 
         public void Set(FamilyName familyName)
         {
+            CheckRule(new PropertyMustNotBeNull(familyName, nameof(FamilyName)));
             FamilyName = familyName;
         }
 
         public void Set(Address address)
         {
+            CheckRule(new PropertyMustNotBeNull(address, nameof(Address)));
             Address = address;
         }
 
         public void Set(Country country)
         {
+            CheckRule(new PropertyMustNotBeNull(country, nameof(CountryOfOrigin)));
             CountryOfOrigin = country;
         }
 
         public void Set(EmailAddress emailAddress)
         {
+            CheckRule(new PropertyMustNotBeNull(emailAddress, nameof(EmailAddress)));
             EmailAddress = emailAddress;
         }
 
         public void Set(Age age)
         {
+            CheckRule(new PropertyMustNotBeNull(age, nameof(Age)));
             Age = age;
         }
 
