@@ -41,5 +41,6 @@ namespace UnitTests.Domain.Entities.ApplicantTests
         {
             return new Age(_faker.Random.Int(20,60));
         }
+
     }
 }
