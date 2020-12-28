@@ -8,7 +8,7 @@ namespace UnitTests.Domain.Entities.ApplicantTests
     public partial class ApplicantTest
     {
         [Fact]
-        public void Applicant_registration_is_successful_when_all_valid_data_is_provided()
+        public void Applicant_create_is_successful_when_all_valid_data_is_provided()
         {
             //given
             Name name = ValidName();
