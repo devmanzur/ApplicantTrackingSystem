@@ -5,7 +5,7 @@ using Hahn.ApplicatonProcess.December2020.Domain.Rules;
 using Hahn.ApplicatonProcess.December2020.Domain.ValueObjects;
 using Xunit;
 
-namespace UnitTests.Domain.ValueObjects
+namespace UnitTests.Domain.Properties
 {
     public class AddressTests
     {

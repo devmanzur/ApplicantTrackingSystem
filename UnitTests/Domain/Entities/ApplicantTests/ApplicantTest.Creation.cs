@@ -34,7 +34,7 @@ namespace UnitTests.Domain.Entities.ApplicantTests
 
         [Theory]
         [MemberData(nameof(GetData))]
-        public void Applicant_create_throws_business_rule_violation_exception_when_any__required_property_is_null(
+        public void Applicant_create_throws_business_rule_violation_exception_when_any_required_property_is_null(
             Name name,
             FamilyName familyName, Address address, string countryOfOrigin,
             EmailAddress emailAddress, Age age, bool hired)
