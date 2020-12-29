@@ -69,9 +69,5 @@ namespace UnitTests.Domain.ValueObjects
             //assert
             Assert.Equal(noExceptionThrown,userRegistrationException);
         }
-        
-        
-        
-        
     }
 }
