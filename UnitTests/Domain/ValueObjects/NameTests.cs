@@ -34,11 +34,11 @@ namespace UnitTests.Domain.ValueObjects
             var  expectedBusinessRuleViolationException = new BusinessRuleViolationException(new NameLengthMustBeAtLeast5Characters(invalidName));
 
             //act
-            var userRegistrationException = Record.Exception(()=> new Name(invalidName));
+            var actualException = Record.Exception(()=> new Name(invalidName));
 
             //assert
-            Assert.IsType<BusinessRuleViolationException>(userRegistrationException);
-            Assert.Equal(expectedBusinessRuleViolationException.Message,userRegistrationException.Message);
+            Assert.IsType<BusinessRuleViolationException>(actualException);
+            Assert.Equal(expectedBusinessRuleViolationException.Message,actualException.Message);
         }
         
         [Fact]
@@ -49,11 +49,11 @@ namespace UnitTests.Domain.ValueObjects
             var  expectedBusinessRuleViolationException = new BusinessRuleViolationException(new NameLengthMustBeAtLeast5Characters(invalidName));
 
             //act
-            var userRegistrationException = Record.Exception(()=> new Name(invalidName));
+            var actualException = Record.Exception(()=> new Name(invalidName));
 
             //assert
-            Assert.IsType<BusinessRuleViolationException>(userRegistrationException);
-            Assert.Equal(expectedBusinessRuleViolationException.Message,userRegistrationException.Message);
+            Assert.IsType<BusinessRuleViolationException>(actualException);
+            Assert.Equal(expectedBusinessRuleViolationException.Message,actualException.Message);
         }
 
         [Fact]
@@ -64,10 +64,10 @@ namespace UnitTests.Domain.ValueObjects
             Exception noExceptionThrown = null;
 
             //act
-            var userRegistrationException = Record.Exception(()=> new Name(validName));
+            var actualException = Record.Exception(()=> new Name(validName));
 
             //assert
-            Assert.Equal(noExceptionThrown,userRegistrationException);
+            Assert.Equal(noExceptionThrown,actualException);
         }
     }
 }
