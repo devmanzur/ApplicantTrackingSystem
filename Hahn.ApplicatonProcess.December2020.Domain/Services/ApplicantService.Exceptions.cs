@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CSharpFunctionalExtensions;
 using Hahn.ApplicatonProcess.December2020.Domain.Entities;
 using Hahn.ApplicatonProcess.December2020.Domain.Exceptions;
 using Microsoft.EntityFrameworkCore;
@@ -9,16 +10,20 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Services
 {
     public partial class ApplicantService
     {
-        private delegate ValueTask<Applicant> ReturningApplicantFunction();
+        private delegate Task<Result<Applicant>> ReturningApplicantFunction();
 
         private delegate Task<IReadOnlyList<Applicant>> ReturningApplicantsFunction();
 
 
-        private async ValueTask<Applicant> TryCatch(ReturningApplicantFunction returningApplicantFunction)
+        private async Task<Result<Applicant>> TryCatch(ReturningApplicantFunction returningApplicantFunction)
         {
             try
             {
                 return await returningApplicantFunction();
+            }
+            catch (BusinessRuleViolationException businessRuleViolationException)
+            {
+                throw CreateAndLogRuleViolationException(businessRuleViolationException);
             }
             catch (DbUpdateConcurrencyException dbUpdateConcurrencyException)
             {
@@ -53,7 +58,12 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Services
             _loggingBroker.LogError(exception);
             return applicantServiceException;
         }
-
+        
+        private BusinessRuleViolationException CreateAndLogRuleViolationException(BusinessRuleViolationException exception)
+        {
+            _loggingBroker.LogCritical(exception);
+            return exception;
+        }
 
         private ApplicantDependencyException CreateAndLogDependencyException(Exception exception)
         {
@@ -62,5 +72,6 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Services
 
             return applicantDependencyException;
         }
+
     }
 }
