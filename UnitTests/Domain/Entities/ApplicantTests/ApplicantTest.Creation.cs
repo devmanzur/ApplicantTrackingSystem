@@ -51,5 +51,7 @@ namespace UnitTests.Domain.Entities.ApplicantTests
             Assert.IsType<BusinessRuleViolationException>(userRegistrationException);
             Assert.Equal(expectedBusinessRuleViolationException.Message,userRegistrationException.Message);
         }
+        
+        
     }
 }

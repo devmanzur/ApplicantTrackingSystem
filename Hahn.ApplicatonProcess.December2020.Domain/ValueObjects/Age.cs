@@ -8,7 +8,7 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.ValueObjects
 
         public Age(int value)
         {
-            CheckRule(new AgeMustBeBetween20And60(value));
+            CheckRule(new AgeMustBeBetween20To60(value));
             Value = value;
         }
         

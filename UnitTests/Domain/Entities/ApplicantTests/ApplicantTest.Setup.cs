@@ -19,7 +19,7 @@ namespace UnitTests.Domain.Entities.ApplicantTests
 
         private FamilyName ValidFamilyName()
         {
-            return new FamilyName(_faker.Name.FirstName());
+            return new FamilyName(_faker.Name.FullName());
         }
 
         private Address ValidAddress()
