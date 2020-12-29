@@ -16,6 +16,7 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Entities
             CheckRule(new PropertyMustNotBeNull(countryOfOrigin, nameof(CountryOfOrigin)));
             CheckRule(new PropertyMustNotBeNull(emailAddress, nameof(EmailAddress)));
             CheckRule(new PropertyMustNotBeNull(age, nameof(Age)));
+            CheckRule(new PropertyMustNotBeNull(hired, nameof(hired)));
 
             Name = name;
             FamilyName = familyName;
