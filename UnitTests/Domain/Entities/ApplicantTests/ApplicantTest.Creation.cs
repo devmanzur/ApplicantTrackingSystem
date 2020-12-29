@@ -16,7 +16,7 @@ namespace UnitTests.Domain.Entities.ApplicantTests
             Name name = ValidName();
             FamilyName familyName = ValidFamilyName();
             Address address = ValidAddress();
-            Country countryOfOrigin = ValidCountry();
+            string countryOfOrigin = ValidCountry();
             EmailAddress emailAddress = ValidEmail();
             Age age = ValidAge();
             bool hired = false;
@@ -37,7 +37,7 @@ namespace UnitTests.Domain.Entities.ApplicantTests
             Name name = null;
             FamilyName familyName = ValidFamilyName();
             Address address = ValidAddress();
-            Country countryOfOrigin = ValidCountry();
+            string countryOfOrigin = ValidCountry();
             EmailAddress emailAddress = ValidEmail();
             Age age = ValidAge();
             bool hired = false;

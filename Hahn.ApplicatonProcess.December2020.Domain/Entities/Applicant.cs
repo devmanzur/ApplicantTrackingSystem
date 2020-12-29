@@ -7,7 +7,7 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Entities
 {
     public class Applicant
     {
-        public Applicant(Name name, FamilyName familyName, Address address, Country countryOfOrigin,
+        public Applicant(Name name, FamilyName familyName, Address address, string countryOfOrigin,
             EmailAddress emailAddress, Age age, bool hired = false)
         {
             CheckRule(new PropertyMustNotBeNull(name, nameof(Name)));
@@ -30,7 +30,7 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Entities
         public Name Name { get; private set; }
         public FamilyName FamilyName { get; private set; }
         public Address Address { get; private set; }
-        public Country CountryOfOrigin { get; private set; }
+        public string CountryOfOrigin { get; private set; }
         public EmailAddress EmailAddress { get; private set; }
         public Age Age { get; private set; }
         public bool Hired { get; private set; }
@@ -53,7 +53,7 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Entities
             Address = address;
         }
 
-        public void Set(Country country)
+        public void Set(string country)
         {
             CheckRule(new PropertyMustNotBeNull(country, nameof(CountryOfOrigin)));
             CountryOfOrigin = country;

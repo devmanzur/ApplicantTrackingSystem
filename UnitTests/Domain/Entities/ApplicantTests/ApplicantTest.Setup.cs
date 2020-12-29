@@ -27,9 +27,9 @@ namespace UnitTests.Domain.Entities.ApplicantTests
             return new Address(_faker.Address.FullAddress());
         }
 
-        private Country ValidCountry()
+        private string ValidCountry()
         {
-            return new Country(_faker.Random.String(3), _faker.Random.String(2), _faker.Random.String(3));
+            return _faker.Random.String(3);
         }
 
         private EmailAddress ValidEmail()
