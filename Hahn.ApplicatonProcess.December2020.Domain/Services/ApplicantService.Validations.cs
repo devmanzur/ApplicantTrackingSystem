@@ -8,9 +8,9 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Services
 {
     public partial class ApplicantService
     {
-        private async Task ValidateCreateRequestAsync(CreateApplicantDto dto)
+        private async Task ValidateApplicantDtoAsync(ApplicantDto dto)
         {
-            var modelValidator = new CreateApplicantDtoValidator();
+            var modelValidator = new ApplicantDtoValidator();
             var validation = await modelValidator.ValidateAsync(dto);
             if (!validation.IsValid)
             {

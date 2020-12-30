@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Hahn.ApplicatonProcess.December2020.Domain.Dto
 {
-    public class CreateApplicantDto
+    public class ApplicantDto
     {
         public string Name { get; set; }
         public string FamilyName { get; set; }
@@ -12,24 +12,12 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Dto
         public string EmailAddress { get; set; }
         public int Age { get; set; }
         public bool Hired { get; set; }
-
-        public CreateApplicantDto(string name, string familyName, string address,
-            string countryOfOrigin,
-            string emailAddress, int age, bool hired)
-        {
-            Name = name;
-            FamilyName = familyName;
-            Address = address;
-            CountryOfOrigin = countryOfOrigin;
-            EmailAddress = emailAddress;
-            Age = age;
-            Hired = hired;
-        }
+        
     }
 
-    public class CreateApplicantDtoValidator : AbstractValidator<CreateApplicantDto>
+    public class ApplicantDtoValidator : AbstractValidator<ApplicantDto>
     {
-        public CreateApplicantDtoValidator()
+        public ApplicantDtoValidator()
         {
             RuleFor(x => x.Name).NotNull().NotEmpty().Must(AtLeast5Characters)
                 .WithMessage("name must be at least 5 characters");
