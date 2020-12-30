@@ -98,7 +98,7 @@ namespace UnitTests.Domain.Services
 
         [Theory]
         [MemberData(nameof(GetData))]
-        public async Task Should_fail_to_add_applicant_when_any_required_data_is_Invalid(string name, string familyName,
+        public void Should_fail_to_add_applicant_when_any_required_data_is_Invalid(string name, string familyName,
             string address, string country, string email,int age,bool isHired
         )
         {
@@ -120,7 +120,7 @@ namespace UnitTests.Domain.Services
 
         [Theory]
         [MemberData(nameof(GetData))]
-        public async Task Should_fail_to_modify_applicant_when_any_update_data_is_Invalid(string name, string familyName,
+        public void Should_fail_to_modify_applicant_when_any_update_data_is_Invalid(string name, string familyName,
             string address, string country, string email,int age,bool isHired
         )
         {
