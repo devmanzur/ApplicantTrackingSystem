@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
-using Hahn.ApplicatonProcess.December2020.Domain.Contract;
+using Hahn.ApplicatonProcess.December2020.Domain.Dto;
 using Hahn.ApplicatonProcess.December2020.Domain.Entities;
+using Hahn.ApplicatonProcess.December2020.Domain.Exceptions;
 using Hahn.ApplicatonProcess.December2020.Domain.Interfaces;
 using Hahn.ApplicatonProcess.December2020.Domain.ValueObjects;
 
@@ -26,14 +27,10 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Services
         public Task<Result<Applicant>> CreateApplicantAsync(CreateApplicantDto dto) =>
             TryCatch(async () =>
             {
-                var fetchCountryData = await _countryDataProvider.GetCountry(dto.CountryOfOrigin);
-                if (fetchCountryData.IsFailure)
-                {
-                    return Result.Failure<Applicant>(fetchCountryData.Error);
-                }
+                await ValidateCreateRequestAsync(dto);
 
                 var applicant = new Applicant(new Name(dto.Name), new FamilyName(dto.FamilyName),
-                    new Address(dto.Address), fetchCountryData.Value, new EmailAddress(dto.EmailAddress),
+                    new Address(dto.Address), dto.CountryOfOrigin, new EmailAddress(dto.EmailAddress),
                     new Age(dto.Age), dto.Hired);
                 await _applicantRepository.AddAsync(applicant);
                 return Result.Success(applicant);
@@ -42,20 +39,28 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Services
         public Task<List<Applicant>> RetrieveAllApplicants() =>
             TryCatch(() => _applicantRepository.ListAllAsync());
 
-        public async Task<Result<Applicant>> RetrieveApplicantById(int applicantId)
+        public Task<Result<Applicant>> RetrieveApplicantById(int applicantId) =>
+                TryCatch(async () =>
+                {
+                    var applicant = await _applicantRepository.FindByIdAsync(applicantId);
+                    if (applicant == null)
+                    {
+                        return Result.Failure<Applicant>($"applicant {applicantId} not found!");
+                    }
+
+                    return Result.Success(applicant);
+                });
+
+        public async Task<Result<Applicant>> ModifyApplicantAsync(int applicantId, UpdateApplicantDto dto)
         {
             var applicant = await _applicantRepository.FindByIdAsync(applicantId);
             if (applicant == null)
             {
-                return Result.Failure<Applicant>($"applicant {applicantId} not found");
+                return Result.Failure<Applicant>($"applicant {applicantId} not found!");
             }
 
-            return Result.Success(applicant);
-        }
 
-        public Task<Result<Applicant>> ModifyApplicantAsync(int applicantId, UpdateApplicantDto dto)
-        {
-            throw new System.NotImplementedException();
+            return Result.Success(applicant);
         }
 
         public Task<Result<Applicant>> DeleteApplicantAsync(int applicantId)

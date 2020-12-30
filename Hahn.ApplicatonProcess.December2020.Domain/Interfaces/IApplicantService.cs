@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
-using Hahn.ApplicatonProcess.December2020.Domain.Contract;
+using Hahn.ApplicatonProcess.December2020.Domain.Dto;
 using Hahn.ApplicatonProcess.December2020.Domain.Entities;
 
 namespace Hahn.ApplicatonProcess.December2020.Domain.Interfaces

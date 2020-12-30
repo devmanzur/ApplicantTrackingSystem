@@ -1,4 +1,4 @@
-namespace Hahn.ApplicatonProcess.December2020.Domain.Contract
+namespace Hahn.ApplicatonProcess.December2020.Domain.Dto
 {
     public class UpdateApplicantDto
     {

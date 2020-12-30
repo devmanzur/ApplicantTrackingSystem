@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
+using FluentValidation;
 using Hahn.ApplicatonProcess.December2020.Domain.Entities;
 using Hahn.ApplicatonProcess.December2020.Domain.Exceptions;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,10 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Services
             try
             {
                 return await returningApplicantFunction();
+            }
+            catch (ValidationException validationException)
+            {
+                throw CreateAndLogValidationException(validationException);
             }
             catch (BusinessRuleViolationException businessRuleViolationException)
             {
@@ -57,6 +62,11 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Services
             var applicantServiceException = new ApplicantServiceException(exception);
             _loggingBroker.LogError(exception);
             return applicantServiceException;
+        }
+        private ValidationException CreateAndLogValidationException(ValidationException exception)
+        {
+            _loggingBroker.LogError(exception);
+            return exception;
         }
         
         private BusinessRuleViolationException CreateAndLogRuleViolationException(BusinessRuleViolationException exception)
