@@ -132,11 +132,18 @@ namespace UnitTests.Domain.Services
                 new Age(ValidAge()), ValidHiredStatus());
         }
 
-        private void Given_country_data_is_found(ApplicantDto requestModel, string country)
+        private void Given_country_data_is_found(ApplicantDto requestModel)
         {
             _countryDataMock.Setup(x =>
-                    x.GetCountry(country))
-                .ReturnsAsync(Result.Success(country));
+                    x.GetCountry(requestModel.CountryOfOrigin))
+                .ReturnsAsync(Result.Success(requestModel.CountryOfOrigin));
+        }
+
+        private void Given_country_data_is_not_found(ApplicantDto requestModel)
+        {
+            _countryDataMock.Setup(x =>
+                    x.GetCountry(requestModel.CountryOfOrigin))
+                .ReturnsAsync(Result.Failure<string>("not found"));
         }
 
         private void Given_user_applicant_to_repo(Applicant applicant)
