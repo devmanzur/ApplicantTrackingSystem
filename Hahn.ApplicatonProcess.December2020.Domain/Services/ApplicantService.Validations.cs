@@ -1,10 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CSharpFunctionalExtensions;
-using FluentValidation;
 using Hahn.ApplicatonProcess.December2020.Domain.Dto;
-using Hahn.ApplicatonProcess.December2020.Domain.Entities;
 using Hahn.ApplicatonProcess.December2020.Domain.Exceptions;
 
 namespace Hahn.ApplicatonProcess.December2020.Domain.Services
@@ -17,8 +14,11 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Services
             var validation = await modelValidator.ValidateAsync(dto);
             if (!validation.IsValid)
             {
+                // throw new ApplicantPropertyValidationException(
+                //     validation.Errors.ToDictionary(x => "", x => x?.ErrorMessage));
+
                 throw new ApplicantPropertyValidationException(
-                    validation.Errors.ToDictionary(x => x.PropertyName, x => x.ErrorMessage));
+                    validation.Errors.ToDictionary(x => "", x => x?.ErrorMessage));
             }
 
             var fetchCountryData = await _countryDataProvider.GetCountry(dto.CountryOfOrigin);

@@ -16,11 +16,12 @@ namespace UnitTests.Domain.Services
         private Mock<ICountryDataProvider> _countryDataMock;
         private Mock<ILoggingBroker> _loggingMock;
         private IApplicantService _applicantService;
-        private Faker _faker;
+
+        private static Faker _faker = new Faker();
+        
 
         public ApplicantServiceTests()
         {
-            _faker = new Faker();
             _applicantRepoMock = new Mock<IApplicantRepository>();
             _countryDataMock = new Mock<ICountryDataProvider>();
             _loggingMock = new Mock<ILoggingBroker>();
@@ -34,12 +35,12 @@ namespace UnitTests.Domain.Services
             return _faker.Random.String(10, 30);
         }
 
-        private string ValidEmailAddress()
+        private static string ValidEmail()
         {
             return _faker.Internet.Email();
         }
 
-        private int ValidAge()
+        private static int ValidAge()
         {
             return _faker.Random.Int(20, 60);
         }
@@ -54,7 +55,7 @@ namespace UnitTests.Domain.Services
             return _faker.Random.String(1, 9);
         }
 
-        private string ValidAddress()
+        private static string ValidAddress()
         {
             return _faker.Random.String(10);
         }
@@ -64,7 +65,7 @@ namespace UnitTests.Domain.Services
             return _faker.Random.String(1, 4);
         }
 
-        private string ValidName()
+        private static string ValidName()
         {
             return _faker.Random.String(5);
         }
@@ -75,7 +76,7 @@ namespace UnitTests.Domain.Services
             return _faker.Random.String(1, 4);
         }
 
-        private string ValidFamilyName()
+        private static string ValidFamilyName()
         {
             return _faker.Random.String(5);
         }
@@ -85,7 +86,7 @@ namespace UnitTests.Domain.Services
             return true;
         }
 
-        private string ValidCountryName()
+        private static string ValidCountry()
         {
             return _faker.Random.String(3, 50);
         }
@@ -128,7 +129,7 @@ namespace UnitTests.Domain.Services
         private Applicant ValidApplicant()
         {
             return new Applicant(new Name(ValidName()), new FamilyName(ValidFamilyName()),
-                new Address(ValidAddress()), ValidCountryName(), new EmailAddress(ValidEmailAddress()),
+                new Address(ValidAddress()), ValidCountry(), new EmailAddress(ValidEmail()),
                 new Age(ValidAge()), ValidHiredStatus());
         }
 
@@ -153,7 +154,7 @@ namespace UnitTests.Domain.Services
                 .ReturnsAsync(applicant);
         }
 
-        private void Given_repo_returns_applicant_by_id(int applicantId,Applicant applicant)
+        private void Given_repo_returns_applicant_by_id(int applicantId, Applicant applicant)
         {
             _applicantRepoMock.Setup(x =>
                     x.FindByIdAsync(applicantId, new CancellationToken()))

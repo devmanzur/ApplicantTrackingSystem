@@ -35,20 +35,6 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Services
                 return Result.Success(applicant);
             });
 
-        public Task<List<Applicant>> RetrieveAllApplicants() =>
-            TryCatch(() => _applicantRepository.ListAllAsync());
-
-        public Task<Result<Applicant>> RetrieveApplicantById(int applicantId) =>
-            TryCatch(async () =>
-            {
-                var applicant = await _applicantRepository.FindByIdAsync(applicantId);
-                if (applicant == null)
-                {
-                    return Result.Failure<Applicant>($"applicant {applicantId} not found!");
-                }
-
-                return Result.Success(applicant);
-            });
 
         public Task<Result<Applicant>> ModifyApplicantAsync(int applicantId, ApplicantDto update) =>
             TryCatch(async () =>

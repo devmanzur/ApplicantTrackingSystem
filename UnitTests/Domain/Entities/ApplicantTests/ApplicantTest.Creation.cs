@@ -61,7 +61,9 @@ namespace UnitTests.Domain.Entities.ApplicantTests
                 new object[]
                     {ValidName(), ValidFamilyName(), ValidAddress(), ValidCountry(), null, ValidAge(), false},
                 new object[]
-                    {ValidName(), ValidFamilyName(), ValidAddress(), ValidCountry(), ValidEmail(), null, true}
+                    {ValidName(), ValidFamilyName(), ValidAddress(), ValidCountry(), ValidEmail(), null, true},
+                new object[]
+                    {null, null, null, null, null, null, true},
             };
     }
 }
