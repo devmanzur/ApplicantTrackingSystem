@@ -15,7 +15,7 @@ namespace UnitTests.Domain.Services
         private Mock<IApplicantRepository> _applicantRepoMock;
         private Mock<ICountryDataProvider> _countryDataMock;
         private Mock<ILoggingBroker> _loggingMock;
-        private ApplicantService _applicantService;
+        private IApplicantService _applicantService;
         private Faker _faker;
 
         public ApplicantServiceTests()
@@ -146,10 +146,17 @@ namespace UnitTests.Domain.Services
                 .ReturnsAsync(Result.Failure<string>("not found"));
         }
 
-        private void Given_user_applicant_to_repo(Applicant applicant)
+        private void Given_applicant_is_added_to_repo(Applicant applicant)
         {
             _applicantRepoMock.Setup(x =>
                     x.AddAsync(applicant, new CancellationToken()))
+                .ReturnsAsync(applicant);
+        }
+
+        private void Given_repo_returns_applicant_by_id(int applicantId,Applicant applicant)
+        {
+            _applicantRepoMock.Setup(x =>
+                    x.FindByIdAsync(applicantId, new CancellationToken()))
                 .ReturnsAsync(applicant);
         }
     }

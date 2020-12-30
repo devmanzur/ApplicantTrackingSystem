@@ -2,7 +2,6 @@ using System;
 using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
 using FluentAssertions;
-using FluentValidation;
 using Hahn.ApplicatonProcess.December2020.Domain.Dto;
 using Hahn.ApplicatonProcess.December2020.Domain.Entities;
 using Hahn.ApplicatonProcess.December2020.Domain.Exceptions;
@@ -28,17 +27,17 @@ namespace UnitTests.Domain.Services
             Given_hired(requestModel,ValidHiredStatus());
 
             Given_country_data_is_found(requestModel);
-            Given_user_applicant_to_repo(newApplicant);
+            Given_applicant_is_added_to_repo(newApplicant);
             
             //act
-            var createApplicant = await _applicantService.CreateApplicantAsync(requestModel);
+            var applicantCreation = await _applicantService.CreateApplicantAsync(requestModel);
             
             //assert
-            createApplicant.IsSuccess.Should().Be(true);
+            applicantCreation.IsSuccess.Should().Be(true);
         }
         
         [Fact]
-        public async Task Should_fail_to_add_applicant_when_country_is_not_found()
+        public void Should_fail_to_add_applicant_when_country_is_not_found()
         {
             //arrange
             ApplicantDto requestModel = new ApplicantDto();
@@ -53,7 +52,7 @@ namespace UnitTests.Domain.Services
             Given_hired(requestModel,ValidHiredStatus());
 
             Given_country_data_is_not_found(requestModel);
-            Given_user_applicant_to_repo(newApplicant);
+            Given_applicant_is_added_to_repo(newApplicant);
             
             //act
             Func<Task>  action = async () =>
@@ -62,7 +61,24 @@ namespace UnitTests.Domain.Services
             };            
             //assert
             action.Should().ThrowExactly<ApplicantPropertyValidationException>();
+
+        }
+
+        [Fact]
+        public async Task Should_successfully_retrieve_applicant_by_id_when_applicant_exists()
+        {
+            //arrange
+            Applicant existingApplicant = ValidApplicant();
+            int applicantId = existingApplicant.Id;
+
+            Given_repo_returns_applicant_by_id(applicantId, existingApplicant);
             
+            //act
+            var applicantRetrieval = await _applicantService.RetrieveApplicantById(applicantId);
+
+            //arrange
+            applicantRetrieval.IsSuccess.Should().Be(true);
+            applicantRetrieval.Should().BeEquivalentTo(Result.Success(existingApplicant));
         }
     }
 }

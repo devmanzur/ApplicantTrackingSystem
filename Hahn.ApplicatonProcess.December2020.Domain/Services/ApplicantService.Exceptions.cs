@@ -22,7 +22,7 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Services
             {
                 return await returningApplicantFunction();
             }
-            catch (ValidationException validationException)
+            catch (ApplicantPropertyValidationException validationException)
             {
                 throw CreateAndLogValidationException(validationException);
             }
@@ -63,7 +63,7 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Services
             _loggingBroker.LogError(exception);
             return applicantServiceException;
         }
-        private ValidationException CreateAndLogValidationException(ValidationException exception)
+        private ApplicantPropertyValidationException CreateAndLogValidationException(ApplicantPropertyValidationException exception)
         {
             _loggingBroker.LogError(exception);
             return exception;
