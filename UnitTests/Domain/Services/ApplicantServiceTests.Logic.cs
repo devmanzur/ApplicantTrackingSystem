@@ -117,6 +117,29 @@ namespace UnitTests.Domain.Services
             //assert
             action.Should().ThrowExactly<ApplicantPropertyValidationException>();
         }
+
+        [Theory]
+        [MemberData(nameof(GetData))]
+        public async Task Should_fail_to_update_applicant_when_any_update_data_is_Invalid(string name, string familyName,
+            string address, string country, string email,int age,bool isHired
+        )
+        {
+            int applicantId = 1;
+            ApplicantDto updateModel = new ApplicantDto();
+
+            Given_name(updateModel, name);
+            Given_family_name(updateModel, familyName);
+            Given_address(updateModel, address);
+            Given_country_of_origin(updateModel, country);
+            Given_email(updateModel, email);
+            Given_age(updateModel, age);
+            Given_hired(updateModel, isHired);
+            
+            //act
+            Func<Task> action = async () => { await _applicantService.ModifyApplicantAsync(applicantId,updateModel); };
+            //assert
+            action.Should().ThrowExactly<ApplicantPropertyValidationException>();
+        }
         
         
         public static IEnumerable<object[]> GetData =>

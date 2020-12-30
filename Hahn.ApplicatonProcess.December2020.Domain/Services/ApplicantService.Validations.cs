@@ -14,11 +14,9 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Services
             var validation = await modelValidator.ValidateAsync(dto);
             if (!validation.IsValid)
             {
-                // throw new ApplicantPropertyValidationException(
-                //     validation.Errors.ToDictionary(x => "", x => x?.ErrorMessage));
-
-                throw new ApplicantPropertyValidationException(
-                    validation.Errors.ToDictionary(x => "", x => x?.ErrorMessage));
+                var errors = new Dictionary<string, string>();
+                
+                throw new ApplicantPropertyValidationException(errors);
             }
 
             var fetchCountryData = await _countryDataProvider.GetCountry(dto.CountryOfOrigin);
