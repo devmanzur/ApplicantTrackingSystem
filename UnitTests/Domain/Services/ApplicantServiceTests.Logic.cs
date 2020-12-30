@@ -80,5 +80,22 @@ namespace UnitTests.Domain.Services
             applicantRetrieval.IsSuccess.Should().Be(true);
             applicantRetrieval.Should().BeEquivalentTo(Result.Success(existingApplicant));
         }
+        
+        [Fact]
+        public async Task Should_fail_to_retrieve_applicant_by_id_when_applicant_does_not_exist()
+        {
+            //arrange
+            Applicant nonExistingApplicant = null;
+            int applicantId = 0;
+
+            Given_repo_returns_applicant_by_id(applicantId, nonExistingApplicant);
+            
+            //act
+            var applicantRetrieval = await _applicantService.RetrieveApplicantById(applicantId);
+
+            //arrange
+            applicantRetrieval.IsSuccess.Should().Be(false);
+            applicantRetrieval.Should().BeEquivalentTo(Result.Failure<Applicant>($"applicant {applicantId} not found!"));
+        }
     }
 }
