@@ -15,7 +15,8 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Services
         private readonly ILoggingBroker _loggingBroker;
         private readonly ICountryDataProvider _countryDataProvider;
 
-        public ApplicantService(IApplicantRepository applicantRepository, ILoggingBroker loggingBroker, ICountryDataProvider countryDataProvider)
+        public ApplicantService(IApplicantRepository applicantRepository, ILoggingBroker loggingBroker,
+            ICountryDataProvider countryDataProvider)
         {
             _applicantRepository = applicantRepository;
             _loggingBroker = loggingBroker;
@@ -32,27 +33,32 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Services
                 }
 
                 var applicant = new Applicant(new Name(dto.Name), new FamilyName(dto.FamilyName),
-                    new Address(dto.Address), fetchCountryData.Value, new EmailAddress(dto.EmailAddress), new Age(dto.Age), dto.Hired);
+                    new Address(dto.Address), fetchCountryData.Value, new EmailAddress(dto.EmailAddress),
+                    new Age(dto.Age), dto.Hired);
                 await _applicantRepository.AddAsync(applicant);
                 return Result.Success(applicant);
             });
 
-        public IReadOnlyList<Applicant> RetrieveAllApplicants()
+        public Task<List<Applicant>> RetrieveAllApplicants() =>
+            TryCatch(() => _applicantRepository.ListAllAsync());
+
+        public async Task<Result<Applicant>> RetrieveApplicantById(int applicantId)
+        {
+            var applicant = await _applicantRepository.FindByIdAsync(applicantId);
+            if (applicant == null)
+            {
+                return Result.Failure<Applicant>($"applicant {applicantId} not found");
+            }
+
+            return Result.Success(applicant);
+        }
+
+        public Task<Result<Applicant>> ModifyApplicantAsync(int applicantId, UpdateApplicantDto dto)
         {
             throw new System.NotImplementedException();
         }
 
-        public ValueTask<Applicant> RetrieveApplicantById(int applicantId)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public ValueTask<Applicant> ModifyApplicantAsync(int applicantId, UpdateApplicantDto dto)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public ValueTask<Applicant> DeleteApplicantAsync(int applicantId)
+        public Task<Result<Applicant>> DeleteApplicantAsync(int applicantId)
         {
             throw new System.NotImplementedException();
         }

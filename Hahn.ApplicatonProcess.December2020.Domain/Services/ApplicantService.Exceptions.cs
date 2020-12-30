@@ -12,7 +12,7 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Services
     {
         private delegate Task<Result<Applicant>> ReturningApplicantFunction();
 
-        private delegate Task<IReadOnlyList<Applicant>> ReturningApplicantsFunction();
+        private delegate Task<List<Applicant>> ReturningApplicantsFunction();
 
 
         private async Task<Result<Applicant>> TryCatch(ReturningApplicantFunction returningApplicantFunction)
@@ -39,7 +39,7 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Services
             }
         }
 
-        private async Task<IReadOnlyList<Applicant>> TryCatch(ReturningApplicantsFunction returningApplicantsFunction)
+        private async Task<List<Applicant>> TryCatch(ReturningApplicantsFunction returningApplicantsFunction)
         {
             try
             {

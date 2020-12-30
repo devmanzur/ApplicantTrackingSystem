@@ -10,9 +10,9 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Interfaces
     public interface IApplicantService
     {
         Task<Result<Applicant>> CreateApplicantAsync(CreateApplicantDto dto);
-        IReadOnlyList<Applicant> RetrieveAllApplicants();
-        ValueTask<Applicant> RetrieveApplicantById(int applicantId);
-        ValueTask<Applicant> ModifyApplicantAsync(int applicantId, UpdateApplicantDto dto);
-        ValueTask<Applicant> DeleteApplicantAsync(int applicantId);
+        Task<List<Applicant>> RetrieveAllApplicants();
+        Task<Result<Applicant>> RetrieveApplicantById(int applicantId);
+        Task<Result<Applicant>> ModifyApplicantAsync(int applicantId, UpdateApplicantDto dto);
+        Task<Result<Applicant>> DeleteApplicantAsync(int applicantId);
     }
 }

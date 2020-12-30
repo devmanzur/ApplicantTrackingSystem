@@ -16,10 +16,9 @@ namespace Hahn.ApplicatonProcess.December2020.Data.Data
             _dbContext = dbContext;
         }
 
-        public ValueTask<Applicant> FindByIdAsync(int id, CancellationToken cancellationToken = default)
+        public Task<Applicant> FindByIdAsync(int id, CancellationToken cancellationToken = default)
         {
-            var keyValues = new object[] { id };
-            return _dbContext.Applicants.FindAsync(keyValues, cancellationToken);
+            return _dbContext.Applicants.FirstOrDefaultAsync(x=>x.Id == id, cancellationToken);
         }
 
         public Task<List<Applicant>> ListAllAsync(CancellationToken cancellationToken = default)
