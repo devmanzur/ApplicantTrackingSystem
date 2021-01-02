@@ -7,10 +7,10 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Interfaces
 {
     public interface IApplicantRepository
     {
-        Task<Applicant> FindByIdAsync(int id, CancellationToken cancellationToken = default);
-        Task<List<Applicant>> ListAllAsync(CancellationToken cancellationToken = default);
-        Task<Applicant> AddAsync(Applicant applicant, CancellationToken cancellationToken = default);
-        Task UpdateAsync(Applicant applicant, CancellationToken cancellationToken = default);
-        Task DeleteAsync(Applicant applicant, CancellationToken cancellationToken = default);
+        Task<Applicant> FindById(int id, CancellationToken cancellationToken = default);
+        Task<List<Applicant>> ListAll(CancellationToken cancellationToken = default);
+        Task<Applicant> Create(Applicant applicant, CancellationToken cancellationToken = default);
+        Task Update(Applicant applicant, CancellationToken cancellationToken = default);
+        Task Delete(Applicant applicant, CancellationToken cancellationToken = default);
     }
 }

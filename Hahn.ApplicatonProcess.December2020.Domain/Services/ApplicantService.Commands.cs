@@ -23,7 +23,7 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Services
             _countryDataProvider = countryDataProvider;
         }
 
-        public Task<Result<Applicant>> CreateApplicantAsync(ApplicantDto dto) =>
+        public Task<Result<Applicant>> RegisterApplicant(ApplicantDto dto) =>
             TryCatch(async () =>
             {
                 await ValidateApplicantDtoAsync(dto);
@@ -31,17 +31,17 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Services
                 var applicant = new Applicant(new Name(dto.Name), new FamilyName(dto.FamilyName),
                     new Address(dto.Address), dto.CountryOfOrigin, new EmailAddress(dto.EmailAddress),
                     new Age(dto.Age), dto.Hired);
-                await _applicantRepository.AddAsync(applicant);
+                await _applicantRepository.Create(applicant);
                 return Result.Success(applicant);
             });
 
 
-        public Task<Result<Applicant>> ModifyApplicantAsync(int applicantId, ApplicantDto update) =>
+        public Task<Result<Applicant>> ModifyApplicant(int applicantId, ApplicantDto update) =>
             TryCatch(async () =>
             {
                 await ValidateApplicantDtoAsync(update);
 
-                var applicant = await _applicantRepository.FindByIdAsync(applicantId);
+                var applicant = await _applicantRepository.FindById(applicantId);
                 if (applicant == null)
                 {
                     return Result.Failure<Applicant>($"applicant {applicantId} not found!");
@@ -49,7 +49,7 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Services
 
                 Apply(applicant, update);
 
-                await _applicantRepository.UpdateAsync(applicant);
+                await _applicantRepository.Update(applicant);
                 return Result.Success(applicant);
             });
 
@@ -64,16 +64,16 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Services
             applicant.Set(update.Hired);
         }
 
-        public Task<Result<Applicant>> DeleteApplicantAsync(int applicantId)
+        public Task<Result<Applicant>> RemoveApplicant(int applicantId)
             => TryCatch(async () =>
             {
-                var applicant = await _applicantRepository.FindByIdAsync(applicantId);
+                var applicant = await _applicantRepository.FindById(applicantId);
                 if (applicant == null)
                 {
                     return Result.Failure<Applicant>($"applicant {applicantId} not found!");
                 }
 
-                await _applicantRepository.DeleteAsync(applicant);
+                await _applicantRepository.Delete(applicant);
                 return Result.Success(applicant);
             });
     }

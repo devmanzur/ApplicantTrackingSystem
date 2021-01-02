@@ -31,7 +31,7 @@ namespace UnitTests.Domain.Services
             Given_applicant_is_added_to_repo(newApplicant);
 
             //act
-            var applicantCreation = await _applicantService.CreateApplicantAsync(requestModel);
+            var applicantCreation = await _applicantService.RegisterApplicant(requestModel);
 
             //assert
             applicantCreation.IsSuccess.Should().Be(true);
@@ -56,7 +56,7 @@ namespace UnitTests.Domain.Services
             Given_applicant_is_added_to_repo(newApplicant);
 
             //act
-            Func<Task> action = async () => { await _applicantService.CreateApplicantAsync(requestModel); };
+            Func<Task> action = async () => { await _applicantService.RegisterApplicant(requestModel); };
             //assert
             action.Should().ThrowExactly<ApplicantPropertyValidationException>();
         }
@@ -113,7 +113,7 @@ namespace UnitTests.Domain.Services
             Given_hired(requestModel, isHired);
             
             //act
-            Func<Task> action = async () => { await _applicantService.CreateApplicantAsync(requestModel); };
+            Func<Task> action = async () => { await _applicantService.RegisterApplicant(requestModel); };
             //assert
             action.Should().ThrowExactly<ApplicantPropertyValidationException>();
         }
@@ -136,7 +136,7 @@ namespace UnitTests.Domain.Services
             Given_hired(updateModel, isHired);
             
             //act
-            Func<Task> action = async () => { await _applicantService.ModifyApplicantAsync(applicantId,updateModel); };
+            Func<Task> action = async () => { await _applicantService.ModifyApplicant(applicantId,updateModel); };
             //assert
             action.Should().ThrowExactly<ApplicantPropertyValidationException>();
         }

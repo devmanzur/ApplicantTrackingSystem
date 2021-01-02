@@ -150,14 +150,14 @@ namespace UnitTests.Domain.Services
         private void Given_applicant_is_added_to_repo(Applicant applicant)
         {
             _applicantRepoMock.Setup(x =>
-                    x.AddAsync(applicant, new CancellationToken()))
+                    x.Create(applicant, new CancellationToken()))
                 .ReturnsAsync(applicant);
         }
 
         private void Given_repo_returns_applicant_by_id(int applicantId, Applicant applicant)
         {
             _applicantRepoMock.Setup(x =>
-                    x.FindByIdAsync(applicantId, new CancellationToken()))
+                    x.FindById(applicantId, new CancellationToken()))
                 .ReturnsAsync(applicant);
         }
     }
