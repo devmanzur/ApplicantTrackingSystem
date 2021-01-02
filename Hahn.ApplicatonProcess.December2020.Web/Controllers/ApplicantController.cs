@@ -69,7 +69,7 @@ namespace Hahn.ApplicatonProcess.December2020.Web.Controllers
             if (registerApplicant.IsSuccess)
             {
                 return CreatedAtAction(nameof(GetApplicant),
-                    new {id = registerApplicant.Value.Id}, registerApplicant);
+                    new {id = registerApplicant.Value.Id}, Envelope.Ok(registerApplicant.Value));
             }
 
             return BadRequest(Envelope.Error(registerApplicant.Error));

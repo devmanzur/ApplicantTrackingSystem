@@ -23,7 +23,7 @@ namespace Hahn.ApplicatonProcess.December2020.Data.Data
 
         public Task<List<Applicant>> ListAll(CancellationToken cancellationToken = default)
         {
-            return _dbContext.Applicants.AsNoTracking().ToListAsync(cancellationToken: cancellationToken);
+            return _dbContext.Applicants.AsQueryable().ToListAsync(cancellationToken);
         }
 
         public async Task<Applicant> Create(Applicant applicant, CancellationToken cancellationToken = default)

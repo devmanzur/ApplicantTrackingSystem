@@ -36,7 +36,7 @@ namespace Hahn.ApplicatonProcess.December2020.Web.Contracts
     public class Envelope : Envelope<string>
     {
         private Envelope(Dictionary<string, string> errors)
-            : base(errors == null ? null : "success", errors)
+            : base(errors == null ? "success" : null, errors)
         {
         }
 

@@ -71,7 +71,7 @@ namespace Hahn.ApplicatonProcess.December2020.Web.MIddlewares
             context.Response.Body.Seek(0, SeekOrigin.Begin);
             _logger.LogInformation(
                 "Http Request Information: {Environment} Schema:{Schema} Host: {Host} Path: {Path} QueryString: {QueryString} Response Body: {ResponseBody}",
-                Environment.NewLine, context.Request.Scheme, context.Request.Host, context.Request.Path, text);
+                Environment.NewLine, context.Request.Scheme, context.Request.Host, context.Request.Path,context.Request.QueryString, text);
             await responseBody.CopyToAsync(originalBodyStream);
         }
     }

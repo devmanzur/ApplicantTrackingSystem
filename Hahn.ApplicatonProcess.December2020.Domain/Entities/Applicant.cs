@@ -7,6 +7,12 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Entities
 {
     public class Applicant
     {
+
+        protected Applicant()
+        {
+            
+        }
+        
         public Applicant(Name name, FamilyName familyName, Address address, string countryOfOrigin,
             EmailAddress emailAddress, Age age, bool hired = false)
         {
