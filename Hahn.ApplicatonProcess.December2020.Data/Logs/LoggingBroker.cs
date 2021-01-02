@@ -22,8 +22,8 @@ namespace Hahn.ApplicatonProcess.December2020.Data.Logs
         public void LogError(Exception exception) =>
             _logger.LogError(exception.Message, exception);
 
-        public void LogInformation(string message) =>
-            _logger.LogInformation(message);
+        public void LogInformation(string message, object[] parameters) =>
+            _logger.LogInformation(message, parameters);
 
         public void LogTrace(string message) =>
             _logger.LogTrace(message);
