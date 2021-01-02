@@ -24,7 +24,7 @@ namespace Hahn.ApplicatonProcess.December2020.Web.Controllers
         public async Task<ActionResult<Envelope<List<ApplicantResponse>>>> GetApplicants()
         {
             var applicants = await _applicantService.RetrieveAllApplicants();
-            return Ok(Envelope.Ok(applicants.Select(ApplicantResponse.From).ToList()));
+            return Ok(Envelope.Ok(applicants.Select(ApplicantResponse.Map).ToList()));
         }
 
         [HttpGet("{applicantId}")]
@@ -33,7 +33,7 @@ namespace Hahn.ApplicatonProcess.December2020.Web.Controllers
             var retrieveApplicant = await _applicantService.RetrieveApplicantById(applicantId);
             if (retrieveApplicant.IsSuccess)
             {
-                return Ok(Envelope.Ok(ApplicantResponse.From(retrieveApplicant.Value)));
+                return Ok(Envelope.Ok(ApplicantResponse.Map(retrieveApplicant.Value)));
             }
 
             return UnprocessableEntity(Envelope.Error(retrieveApplicant.Error));
@@ -45,7 +45,7 @@ namespace Hahn.ApplicatonProcess.December2020.Web.Controllers
             var removeApplicant = await _applicantService.RemoveApplicant(applicantId);
             if (removeApplicant.IsSuccess)
             {
-                return Ok(Envelope.Ok(ApplicantResponse.From(removeApplicant.Value)));
+                return Ok(Envelope.Ok(ApplicantResponse.Map(removeApplicant.Value)));
             }
 
             return UnprocessableEntity(Envelope.Error(removeApplicant.Error));
@@ -58,7 +58,7 @@ namespace Hahn.ApplicatonProcess.December2020.Web.Controllers
             var modifyApplicant = await _applicantService.ModifyApplicant(applicantId, dto);
             if (modifyApplicant.IsSuccess)
             {
-                return Ok(Envelope.Ok(ApplicantResponse.From(modifyApplicant.Value)));
+                return Ok(Envelope.Ok(ApplicantResponse.Map(modifyApplicant.Value)));
             }
 
             return UnprocessableEntity(Envelope.Error(modifyApplicant.Error));
@@ -72,7 +72,7 @@ namespace Hahn.ApplicatonProcess.December2020.Web.Controllers
             {
                 return CreatedAtAction(nameof(GetApplicant),
                     new {applicantId = registerApplicant.Value.Id},
-                    Envelope.Ok(ApplicantResponse.From(registerApplicant.Value)));
+                    Envelope.Ok(ApplicantResponse.Map(registerApplicant.Value)));
             }
 
             return BadRequest(Envelope.Error(registerApplicant.Error));

@@ -1,6 +1,7 @@
 using System;
 using Hahn.ApplicatonProcess.December2020.Data.Extensions;
 using Hahn.ApplicatonProcess.December2020.Domain.Extensions;
+using Hahn.ApplicatonProcess.December2020.Web.Extensions;
 using Hahn.ApplicatonProcess.December2020.Web.MIddlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,25 +28,7 @@ namespace Hahn.ApplicatonProcess.December2020.Web
             services.AddRouting(options => options.LowercaseUrls = true);
             services.SetupDomainDependencies();
             services.SetupDataDependencies();
-            SetupSwagger(services);
-        }
-        
-        private static void SetupSwagger(IServiceCollection services)
-        {
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Title = "APPLICANT TRACKING SYSTEM API",
-                    Description = "This is the API for managing applicants",
-                    Contact = new OpenApiContact
-                    {
-                        Name = "Manzur Alahi",
-                        Email = "devmanzur@gmail.com",
-                        Url = new Uri("https://www.linkedin.com/in/devmanzur")
-                    }
-                });
-            });
+            services.SetupSwagger();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

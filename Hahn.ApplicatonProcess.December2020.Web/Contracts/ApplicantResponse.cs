@@ -13,7 +13,7 @@ namespace Hahn.ApplicatonProcess.December2020.Web.Contracts
         public int Age { get; private set; }
         public bool Hired { get; private set; }
 
-        public static ApplicantResponse From(Applicant applicant)
+        public static ApplicantResponse Map(Applicant applicant)
         {
             return new ApplicantResponse()
             {
