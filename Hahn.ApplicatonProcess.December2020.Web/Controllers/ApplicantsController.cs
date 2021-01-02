@@ -20,6 +20,10 @@ namespace Hahn.ApplicatonProcess.December2020.Web.Controllers
             _applicantService = applicantService;
         }
 
+        /// <summary>
+        /// Returns all applicants in the system
+        /// </summary>
+        /// <response code="200">Returns all applicants in system</response>
         [HttpGet]
         public async Task<ActionResult<Envelope<List<ApplicantResponse>>>> GetApplicants()
         {
@@ -27,6 +31,11 @@ namespace Hahn.ApplicatonProcess.December2020.Web.Controllers
             return Ok(Envelope.Ok(applicants.Select(ApplicantResponse.Map).ToList()));
         }
 
+        /// <summary>
+        /// Returns applicants by id
+        /// </summary>
+        /// <response code="200">Returns applicant by id</response>
+        /// <response code="422">Failed to find applicant with given id</response>
         [HttpGet("{applicantId}")]
         public async Task<ActionResult<Envelope<ApplicantResponse>>> GetApplicant(int applicantId)
         {
@@ -39,6 +48,11 @@ namespace Hahn.ApplicatonProcess.December2020.Web.Controllers
             return UnprocessableEntity(Envelope.Error(retrieveApplicant.Error));
         }
 
+        /// <summary>
+        /// Deletes applicants by id
+        /// </summary>
+        /// <response code="200">Successfully deleted applicant by id</response>
+        /// <response code="422">Failed to find applicant with given id</response>
         [HttpDelete("{applicantId}")]
         public async Task<ActionResult<Envelope<ApplicantResponse>>> RemoveApplicant(int applicantId)
         {
@@ -51,6 +65,11 @@ namespace Hahn.ApplicatonProcess.December2020.Web.Controllers
             return UnprocessableEntity(Envelope.Error(removeApplicant.Error));
         }
 
+        /// <summary>
+        /// Modifies applicant by id
+        /// </summary>
+        /// <response code="200">Successfully modified applicant by id</response>
+        /// <response code="422">Failed to modify applicant due to validation error</response>
         [HttpPut("{applicantId}")]
         public async Task<ActionResult<Envelope<ApplicantResponse>>> ModifyApplicant(int applicantId,
             [FromBody] ApplicantDto dto)
@@ -64,6 +83,11 @@ namespace Hahn.ApplicatonProcess.December2020.Web.Controllers
             return UnprocessableEntity(Envelope.Error(modifyApplicant.Error));
         }
 
+        /// <summary>
+        /// Registers new applicant
+        /// </summary>
+        /// <response code="201">Returns new applicant data with access url</response>
+        /// <response code="422">Failed to register applicant due to validation error</response>
         [HttpPost]
         public async Task<ActionResult<Envelope<ApplicantResponse>>> RegisterApplicant([FromBody] ApplicantDto dto)
         {
