@@ -1,4 +1,5 @@
 using Hahn.ApplicatonProcess.December2020.Data.Extensions;
+using Hahn.ApplicatonProcess.December2020.Domain.Extensions;
 using Hahn.ApplicatonProcess.December2020.Web.MIddlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,6 +22,7 @@ namespace Hahn.ApplicatonProcess.December2020.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.SetupDomainDependencies();
             services.SetupDataDependencies();
         }
 
