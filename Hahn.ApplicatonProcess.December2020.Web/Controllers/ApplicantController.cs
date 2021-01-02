@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Hahn.ApplicatonProcess.December2020.Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class ApplicantController : ControllerBase
     {
