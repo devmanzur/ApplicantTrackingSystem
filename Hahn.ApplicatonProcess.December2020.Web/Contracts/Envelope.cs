@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Hahn.ApplicatonProcess.December2020.Web.Contracts
 {
@@ -9,15 +10,27 @@ namespace Hahn.ApplicatonProcess.December2020.Web.Contracts
         protected internal Envelope(T body, Dictionary<string, string> errors)
         {
             Body = body;
-            Errors = errors;
+            Errors = errors?.Select(x => new PropertyError(x)).ToList();
             TimeGenerated = DateTime.UtcNow;
             IsSuccess = errors == null;
         }
 
         public T Body { get; }
-        public Dictionary<string, string> Errors { get; }
+        public List<PropertyError> Errors { get; }
         public DateTime TimeGenerated { get; }
         public bool IsSuccess { get; }
+    }
+
+    public class PropertyError
+    {
+        public PropertyError(in KeyValuePair<string, string> keyValuePair)
+        {
+            PropertyName = keyValuePair.Key;
+            ErrorMessage = keyValuePair.Value;
+        }
+
+        public string PropertyName { get; private set; }
+        public string ErrorMessage { get; private set; }
     }
 
     public class Envelope : Envelope<string>
@@ -46,7 +59,7 @@ namespace Hahn.ApplicatonProcess.December2020.Web.Contracts
         {
             return new Envelope(new Dictionary<string, string>()
             {
-                {"error", error}
+                {"action", error}
             });
         }
 

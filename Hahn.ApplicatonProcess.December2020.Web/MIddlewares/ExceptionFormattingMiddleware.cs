@@ -40,7 +40,7 @@ namespace Hahn.ApplicatonProcess.December2020.Web.MIddlewares
             var errors = new Dictionary<string, string>()
             {
                 {
-                    "error", _env.IsDevelopment()
+                    "action", _env.IsDevelopment()
                         ? exception.Message
                         : DummyMessage()
                 }
@@ -53,7 +53,8 @@ namespace Hahn.ApplicatonProcess.December2020.Web.MIddlewares
                     errors = new Dictionary<string, string>()
                     {
                         {
-                            businessRuleViolationException.BrokenRule.PropertyName, businessRuleViolationException.BrokenRule.ErrorMessage
+                            businessRuleViolationException.BrokenRule.PropertyName,
+                            businessRuleViolationException.BrokenRule.ErrorMessage
                         }
                     };
                     break;
