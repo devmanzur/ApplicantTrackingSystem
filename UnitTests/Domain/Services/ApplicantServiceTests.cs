@@ -136,14 +136,14 @@ namespace UnitTests.Domain.Services
         private void Given_country_data_is_found(ApplicantDto requestModel)
         {
             _countryDataMock.Setup(x =>
-                    x.GetCountry(requestModel.CountryOfOrigin))
+                    x.ValidateCountry(requestModel.CountryOfOrigin))
                 .ReturnsAsync(Result.Success(requestModel.CountryOfOrigin));
         }
 
         private void Given_country_data_is_not_found(ApplicantDto requestModel)
         {
             _countryDataMock.Setup(x =>
-                    x.GetCountry(requestModel.CountryOfOrigin))
+                    x.ValidateCountry(requestModel.CountryOfOrigin))
                 .ReturnsAsync(Result.Failure<string>("not found"));
         }
 

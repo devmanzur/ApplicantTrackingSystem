@@ -5,6 +5,6 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Interfaces
 {
     public interface ICountryDataProvider
     {
-        Task<Result<string>> GetCountry(string name);
+        Task<Result> ValidateCountry(string name);
     }
 }

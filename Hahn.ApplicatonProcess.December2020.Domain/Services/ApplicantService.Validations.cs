@@ -18,14 +18,14 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Services
                     validation.Errors.ToDictionary(x => x.PropertyName, x => x.ErrorMessage));
             }
 
-            // var fetchCountryData = await _countryDataProvider.GetCountry(dto.CountryOfOrigin);
-            // if (fetchCountryData.IsFailure)
-            // {
-            //     throw new ApplicantPropertyValidationException(new Dictionary<string, string>()
-            //     {
-            //         {nameof(ApplicantDto.CountryOfOrigin), $"country {dto.CountryOfOrigin} is not valid!"}
-            //     });
-            // }
+            var fetchCountryData = await _countryDataProvider.ValidateCountry(dto.CountryOfOrigin);
+            if (fetchCountryData.IsFailure)
+            {
+                throw new ApplicantPropertyValidationException(new Dictionary<string, string>()
+                {
+                    {nameof(ApplicantDto.CountryOfOrigin), $"country {dto.CountryOfOrigin} is not valid!"}
+                });
+            }
         }
     }
 }

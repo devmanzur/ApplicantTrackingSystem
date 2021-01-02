@@ -15,6 +15,7 @@ namespace Hahn.ApplicatonProcess.December2020.Web.Contracts.Examples.Response
                     Name = "Manzur",
                     FamilyName = "Alahi",
                     Address = "Dhaka, Bangladesh",
+                    EmailAddress = "devmanzur@gmail.com",
                     CountryOfOrigin = "Bangladesh",
                     Age = 23,
                     Hired = false
@@ -25,6 +26,7 @@ namespace Hahn.ApplicatonProcess.December2020.Web.Contracts.Examples.Response
                     Name = "Simi",
                     FamilyName = "Ahmed",
                     Address = "Dhaka, Bangladesh",
+                    EmailAddress = "simi@gmail.com",
                     CountryOfOrigin = "Bangladesh",
                     Age = 21,
                     Hired = false

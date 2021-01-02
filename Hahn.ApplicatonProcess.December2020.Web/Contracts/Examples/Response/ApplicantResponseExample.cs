@@ -13,6 +13,7 @@ namespace Hahn.ApplicatonProcess.December2020.Web.Contracts.Examples.Response
                 FamilyName = "Alahi",
                 Address = "Dhaka, Bangladesh",
                 CountryOfOrigin = "Bangladesh",
+                EmailAddress = "devmanzur@gmail.com",
                 Age = 23,
                 Hired = false
             });

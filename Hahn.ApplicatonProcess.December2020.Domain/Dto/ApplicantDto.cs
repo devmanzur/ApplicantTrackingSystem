@@ -26,9 +26,9 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Dto
                 .WithMessage("address must be at least 10 characters");
             RuleFor(x => x.CountryOfOrigin).Must(ValidString)
                 .WithMessage("invalid country");
-            RuleFor(x => x.EmailAddress).NotNull().NotEmpty().Must(ValidEmail)
+            RuleFor(x => x.EmailAddress).Must(ValidEmail)
                 .WithMessage("invalid email address");
-            RuleFor(x => x.Age).NotNull().NotEmpty().Must(ValidAge)
+            RuleFor(x => x.Age).NotNull().Must(ValidAge)
                 .WithMessage("age must be between 20 and 60");
         }
 
