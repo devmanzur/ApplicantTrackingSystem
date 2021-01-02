@@ -16,6 +16,7 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Rules
             return _age < 20 || _age > 60;
         }
 
-        public string Message => "age must be between 20 and 60";
+        public string ErrorMessage => "age must be between 20 and 60";
+        public string PropertyName => "age";
     }
 }

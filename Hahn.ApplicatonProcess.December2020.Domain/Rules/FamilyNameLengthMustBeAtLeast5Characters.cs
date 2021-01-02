@@ -16,6 +16,7 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Rules
             return _familyName == null || _familyName.Length < 5;
         }
 
-        public string Message => "family name must be at least 5 characters";
+        public string ErrorMessage => "family name must be at least 5 characters";
+        public string PropertyName => "family name";
     }
 }

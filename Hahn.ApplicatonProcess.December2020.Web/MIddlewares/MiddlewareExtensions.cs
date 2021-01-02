@@ -8,5 +8,9 @@ namespace Hahn.ApplicatonProcess.December2020.Web.MIddlewares
         {
             return builder.UseMiddleware<RequestResponseLoggingMiddleware>();
         }
+        public static IApplicationBuilder UseExceptionFormatting(this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<ExceptionFormattingMiddleware>();
+        }
     }
 }

@@ -23,6 +23,7 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Rules
             return !regex.IsMatch(_value);
         }
 
-        public string Message => "email must be valid";
+        public string ErrorMessage => "email must be valid";
+        public string PropertyName => "email";
     }
 }

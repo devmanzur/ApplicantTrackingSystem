@@ -17,6 +17,7 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Rules
             return _address == null || _address.Length < 10;
         }
 
-        public string Message => "address must be at least 10 characters";
+        public string ErrorMessage => "address must be at least 10 characters";
+        public string PropertyName  => "address";
     }
 }

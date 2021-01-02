@@ -7,7 +7,7 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Exceptions
     {
         public IBusinessRule BrokenRule { get; }
 
-        public BusinessRuleViolationException(IBusinessRule brokenRule) : base(brokenRule.Message)
+        public BusinessRuleViolationException(IBusinessRule brokenRule) : base(brokenRule.ErrorMessage)
         {
             BrokenRule = brokenRule;
         }

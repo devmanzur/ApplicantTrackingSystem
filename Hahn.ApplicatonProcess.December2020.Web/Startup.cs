@@ -38,6 +38,8 @@ namespace Hahn.ApplicatonProcess.December2020.Web
 
             app.UseRouting();
 
+            app.UseExceptionFormatting();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });

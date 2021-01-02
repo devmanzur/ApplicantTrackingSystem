@@ -15,6 +15,7 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Rules
             return _name == null || _name.Length < 5;
         }
 
-        public string Message => "name must be at least 5 characters";
+        public string ErrorMessage => "name must be at least 5 characters";
+        public string PropertyName => "name";
     }
 }

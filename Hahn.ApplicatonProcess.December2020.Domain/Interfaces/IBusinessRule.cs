@@ -4,6 +4,7 @@
     {
         bool IsBroken();
 
-        string Message { get; }
+        string ErrorMessage { get; }
+        string PropertyName { get; }
     }
 }

@@ -15,6 +15,7 @@ namespace Hahn.ApplicatonProcess.December2020.Domain.Rules
 
         public bool IsBroken() => _value == null;
 
-        public string Message => $"{_name} must not be null";
+        public string ErrorMessage => $"{_name} must not be null";
+        public string PropertyName => _name?.ToLower();
     }
 }
