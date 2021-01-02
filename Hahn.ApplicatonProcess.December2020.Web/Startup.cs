@@ -24,6 +24,7 @@ namespace Hahn.ApplicatonProcess.December2020.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddRouting(options => options.LowercaseUrls = true);
             services.SetupDomainDependencies();
             services.SetupDataDependencies();
             SetupSwagger(services);
