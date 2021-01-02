@@ -1,4 +1,5 @@
 using Hahn.ApplicatonProcess.December2020.Data.Extensions;
+using Hahn.ApplicatonProcess.December2020.Web.MIddlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -30,6 +31,8 @@ namespace Hahn.ApplicatonProcess.December2020.Web
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            app.UseRequestResponseLogging();
 
             app.UseHttpsRedirection();
 
