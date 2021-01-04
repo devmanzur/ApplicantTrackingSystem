@@ -5,11 +5,11 @@ function getId(){
   return ++id;
 }
 
-let contacts = [
+let applicants = [
   {
     id:getId(),
-    firstName:'John',
-    lastName:'Tolkien',
+    firstName:'Manzur',
+    lastName:'Alahi',
     email:'tolkien@inklings.com',
     phoneNumber:'867-5309'
   },
@@ -46,11 +46,11 @@ let contacts = [
 export class WebAPI {
   isRequesting = false;
   
-  getContactList(){
+  getApplicantList(){
     this.isRequesting = true;
     return new Promise(resolve => {
       setTimeout(() => {
-        let results = contacts.map(x =>  { return {
+        let results = applicants.map(x =>  { return {
           id:x.id,
           firstName:x.firstName,
           lastName:x.lastName,
@@ -62,30 +62,30 @@ export class WebAPI {
     });
   }
 
-  getContactDetails(id){
+  getApplicantDetails(id){
     this.isRequesting = true;
     return new Promise(resolve => {
       setTimeout(() => {
-        let found = contacts.filter(x => x.id == id)[0];
+        let found = applicants.filter(x => x.id == id)[0];
         resolve(JSON.parse(JSON.stringify(found)));
         this.isRequesting = false;
       }, latency);
     });
   }
 
-  saveContact(contact){
+  saveApplicant(applicant){
     this.isRequesting = true;
     return new Promise(resolve => {
       setTimeout(() => {
-        let instance = JSON.parse(JSON.stringify(contact));
-        let found = contacts.filter(x => x.id == contact.id)[0];
+        let instance = JSON.parse(JSON.stringify(applicant));
+        let found = applicant.filter(x => x.id == applicant.id)[0];
 
         if(found){
-          let index = contacts.indexOf(found);
-          contacts[index] = instance;
+          let index = applicant.indexOf(found);
+          applicants[index] = instance;
         }else{
           instance.id = getId();
-          contacts.push(instance);
+          applicants.push(instance);
         }
 
         this.isRequesting = false;
