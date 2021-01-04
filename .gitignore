@@ -81,3 +81,10 @@ _ReSharper*/
 *.DotSettings.user
 /.idea/
 /Hahn.ApplicatonProcess.December2020.Web/Logs/
+
+# Ignore node_modules
+/FrontEnd/applicant-manager/.vscode/
+/FrontEnd/applicant-manager/node_modules/
+
+
+
