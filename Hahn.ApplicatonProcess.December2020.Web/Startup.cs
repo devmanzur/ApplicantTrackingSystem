@@ -47,10 +47,9 @@ namespace Hahn.ApplicatonProcess.December2020.Web
             app.UseSwagger();
             app.UseSwaggerUI(x => { x.SwaggerEndpoint("/swagger/v1/swagger.json", "APPLICANT: API"); });
 
-            app.UseRequestResponseLogging();
-
             app.UseExceptionFormatting();
-
+            app.UseRequestResponseLogging();
+            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
