@@ -1,42 +1,102 @@
 <template>
   <div class="card">
-    <div class="card-header text-white bg-primary">
-      Profile
-    </div>
+    <div class="card-header text-white bg-primary">Profile</div>
     <div class="card-body">
       <form role="form">
         <div class="form-group row">
           <label class="col-md-3 col-form-label">First Name</label>
           <div class="col-md-9">
-            <input type="text" placeholder="first name" class="form-control" value.bind="applicant.firstName">
+            <input
+              type="text"
+              placeholder="first name"
+              class="form-control"
+              value.bind="applicant.firstName"
+            />
           </div>
         </div>
 
         <div class="form-group row">
           <label class="col-md-3 col-form-label">Last Name</label>
           <div class="col-md-9">
-            <input type="text" placeholder="last name" class="form-control" value.bind="applicant.lastName">
+            <input
+              type="text"
+              placeholder="last name"
+              class="form-control"
+              value.bind="applicant.lastName"
+            />
           </div>
         </div>
 
         <div class="form-group row">
           <label class="col-md-3 col-form-label">Email</label>
           <div class="col-md-9">
-            <input type="text" placeholder="email" class="form-control" value.bind="applicant.email">
+            <input
+              type="text"
+              placeholder="email"
+              class="form-control"
+              value.bind="applicant.email"
+            />
           </div>
         </div>
 
         <div class="form-group row">
-          <label class="col-md-3 col-form-label">Phone Number</label>
+          <label class="col-md-3 col-form-label">Address</label>
           <div class="col-md-9">
-            <input type="text" placeholder="phone number" class="form-control" value.bind="applicant.phoneNumber">
+            <input
+              type="text"
+              placeholder="address"
+              class="form-control"
+              value.bind="applicant.address"
+            />
           </div>
         </div>
+
+
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label">Country Of Origin</label>
+          <div class="col-md-9">
+            <input
+              type="text"
+              placeholder="country of origin"
+              class="form-control"
+              value.bind="applicant.countryOfOrigin"
+            />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label">Age</label>
+          <div class="col-md-9">
+            <input
+              type="number"
+              placeholder="age"
+              class="form-control"
+              value.bind="applicant.age"
+            />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label">Hired</label>
+          <div class="col-md-9">
+            <input
+              type="checkbox"
+              class="form-control"
+              checked.bind="applicant.hired"
+            />
+          </div>
+        </div>
+
       </form>
       <div>
-        <button class="btn btn-success float-right" click.delegate="save()" disabled.bind="!canSave">Save</button>
+        <button
+          class="btn btn-success float-right"
+          click.delegate="save()"
+          disabled.bind="!canSave"
+        >
+          Save
+        </button>
       </div>
     </div>
   </div>
 </template>
-

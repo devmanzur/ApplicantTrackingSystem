@@ -23,7 +23,6 @@ export class ApplicantDetail{
       this.routeConfig.navModel.setTitle(this.applicant.firstName);
       this.originalApplicant = JSON.parse(JSON.stringify(this.applicant));
       this.ea.publish(new ApplicantViewed(this.applicant));
-
     });
   }
 
@@ -32,6 +31,8 @@ export class ApplicantDetail{
   }
 
   save() {
+    let result = confirm('Are you sure you want to update this applicant?');
+    if(result)
     this.api.saveApplicant(this.applicant).then(applicant => {
       this.applicant = <Applicant>applicant;
       this.routeConfig.navModel.setTitle(this.applicant.firstName);
@@ -41,15 +42,15 @@ export class ApplicantDetail{
   }
 
   canDeactivate() {
-    if (!areEqual(this.originalApplicant, this.applicant)) {
-      let result = confirm('You have unsaved changes. Are you sure you wish to leave?');
+    // if (!areEqual(this.originalApplicant, this.applicant)) {
+    //   let result = confirm('You have unsaved changes. Are you sure you wish to leave?');
 
-      if(!result) {
-        this.ea.publish(new ApplicantViewed(this.applicant));
-      }
+    //   if(!result) {
+    //     this.ea.publish(new ApplicantViewed(this.applicant));
+    //   }
 
-      return result;
-    }
+    //   return result;
+    // }
 
     return true;
   }
