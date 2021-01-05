@@ -1,5 +1,5 @@
 import { Applicant } from "./../data/applicant";
 
-export class ApplicantUpdated {
+export class ApplicantCreated {
   constructor(public applicant: Applicant) {}
 }
