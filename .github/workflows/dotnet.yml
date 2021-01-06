@@ -1,25 +1,20 @@
-name: .NET
+name: ASP.NET Core CI
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: [push]
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
+  build_and_test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macOS-latest, ubuntu-latest, windows-2019]
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+    - name: Build with dotnet
+      run: dotnet build ./src/Solution.sln --configuration Release
+    - name: Test with dotnet
+      run: dotnet test ./src/Solution.sln --configuration Release
