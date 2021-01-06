@@ -6,7 +6,7 @@ a simple applicant management system
 
 # Running The Application
 Prerequisites:
-- Visual Studio 2015 with Update 3
+- Visual Studio or Jetbrains Rider
 - [ASP.NET Core](https://dotnet.microsoft.com/download) must be downloaded and installed.
 
 ## Running the App in Visual Studio or Jetbrains Rider
