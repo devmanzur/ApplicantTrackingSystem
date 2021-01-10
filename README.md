@@ -1,5 +1,5 @@
 [![BCH compliance](https://bettercodehub.com/edge/badge/devmanzur/ApplicantTrackingSystem?branch=master)](https://bettercodehub.com/)
-![.NET](https://github.com/devmanzur/ApplicantTrackingSystem/workflows/.NET/badge.svg)(https://github.com/devmanzur/ApplicantTrackingSystem/actions)
+[![.NET](https://github.com/devmanzur/ApplicantTrackingSystem/workflows/.NET/badge.svg)](https://github.com/devmanzur/ApplicantTrackingSystem/actions)
 
 # Applicant Tracking System
 a simple applicant management system
