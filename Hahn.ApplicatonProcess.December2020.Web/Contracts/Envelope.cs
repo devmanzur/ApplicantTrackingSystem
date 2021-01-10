@@ -7,10 +7,10 @@ namespace Hahn.ApplicatonProcess.December2020.Web.Contracts
     public class Envelope<T>
     {
         // ReSharper disable once MemberCanBeProtected.Global
-        protected internal Envelope(T body, Dictionary<string, string> errors)
+        protected internal Envelope(T body, List<PropertyError>  errors)
         {
             Body = body;
-            Errors = errors?.Select(x => new PropertyError(x)).ToList();
+            Errors = errors;
             TimeGenerated = DateTime.UtcNow;
             IsSuccess = errors == null;
         }
@@ -23,10 +23,10 @@ namespace Hahn.ApplicatonProcess.December2020.Web.Contracts
 
     public class PropertyError
     {
-        public PropertyError(in KeyValuePair<string, string> keyValuePair)
+        public PropertyError(string name, string message)
         {
-            PropertyName = keyValuePair.Key;
-            ErrorMessage = keyValuePair.Value;
+            PropertyName = name;
+            ErrorMessage = message;
         }
 
         public string PropertyName { get; private set; }
@@ -35,7 +35,7 @@ namespace Hahn.ApplicatonProcess.December2020.Web.Contracts
 
     public class Envelope : Envelope<string>
     {
-        private Envelope(Dictionary<string, string> errors)
+        private Envelope(List<PropertyError> errors)
             : base(errors == null ? "success" : null, errors)
         {
         }
@@ -50,20 +50,20 @@ namespace Hahn.ApplicatonProcess.December2020.Web.Contracts
             return new Envelope(null);
         }
 
-        public static Envelope Error(Dictionary<string, string> errors)
+        public static Envelope Error(List<PropertyError> errors)
         {
             return new Envelope(errors);
         }
 
         public static Envelope Error(string error)
         {
-            return new Envelope(new Dictionary<string, string>()
+            return new Envelope(new List<PropertyError>()
             {
-                {"action", error}
+                new PropertyError("action", error)
             });
         }
 
-        public static Envelope<T> Error<T>(T error, Dictionary<string, string> errors)
+        public static Envelope<T> Error<T>(T error, List<PropertyError> errors)
         {
             return new Envelope<T>(error, errors);
         }

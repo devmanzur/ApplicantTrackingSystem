@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Hahn.ApplicatonProcess.December2020.Domain.Exceptions;
@@ -37,30 +38,28 @@ namespace Hahn.ApplicatonProcess.December2020.Web.MIddlewares
         private Task HandleException(HttpContext context, Exception exception, IWebHostEnvironment env)
         {
             var code = HttpStatusCode.InternalServerError;
-            var errors = new Dictionary<string, string>()
+            var errors = new List<PropertyError>()
             {
-                {
-                    "action", _env.IsDevelopment()
-                        ? exception.Message
-                        : DummyMessage()
-                }
+                new PropertyError("action", _env.IsDevelopment()
+                    ? exception.Message
+                    : DummyMessage())
             };
 
             switch (exception)
             {
                 case BusinessRuleViolationException businessRuleViolationException:
                     code = HttpStatusCode.UnprocessableEntity;
-                    errors = new Dictionary<string, string>()
+                    errors = new List<PropertyError>()
                     {
-                        {
+                        new PropertyError(
                             businessRuleViolationException.BrokenRule.PropertyName,
                             businessRuleViolationException.BrokenRule.ErrorMessage
-                        }
+                        )
                     };
                     break;
                 case ApplicantPropertyValidationException validationException:
                     code = HttpStatusCode.UnprocessableEntity;
-                    errors = validationException.Errors;
+                    errors = validationException.Errors.Select(x => new PropertyError(x.Key, x.Value)).ToList();
                     break;
             }
 

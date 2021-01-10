@@ -7,9 +7,9 @@ namespace Hahn.ApplicatonProcess.December2020.Web.Contracts.Examples.Response
     {
         public Envelope GetExamples()
         {
-            return Envelope.Error(new Dictionary<string, string>()
+            return Envelope.Error(new List<PropertyError>()
             {
-                {"error_property","explanation, what went wrong"}
+                new PropertyError("error_property","explanation, what went wrong")
             });
         }
     }
